@@ -1,7 +1,7 @@
 require_relative './person' # Require the person.rb file
 
 class Student < Person
-  def initialize(classroom, name: 'Unknown', age: null, parent_permission: true)
+  def initialize(classroom, age, name: 'Unknown', parent_permission: true)
     super(name: name, age: age, parent_permission: parent_permission)
     @classroom = classroom
   end
