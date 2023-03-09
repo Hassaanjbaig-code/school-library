@@ -3,7 +3,7 @@ require_relative './capitalizedecorator'
 require_relative './trimmer_decorator'
 
 class Person < Nameable
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :rental
   attr_reader :id
 
   def initialize(age, name: 'Unknown', parent_permission: true)
