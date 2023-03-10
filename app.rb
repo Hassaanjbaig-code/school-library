@@ -166,9 +166,9 @@ class App
 end
 
 def list_rentals
-    @people.each do |person|
-        puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
+  @people.each do |person|
+    puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+  end
   puts 'Select a person to see their rentals by there id'
   rental_id = gets.chomp.to_i
   @rentals.each do |rental|
