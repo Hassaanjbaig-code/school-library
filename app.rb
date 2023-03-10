@@ -3,6 +3,7 @@ require_relative './person'
 require_relative './rentel'
 require_relative './student'
 require_relative './teacher'
+require_relative './rentel.rb'
 
 class App
   def initialize
@@ -48,6 +49,21 @@ class App
       puts 'Please choose a valid option'
     end
   end
+
+    def list_books
+        if @books.length == 0
+            puts 'There are no books'
+        else
+            @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+        end
+        puts 'For go back to menu press 0'
+        input = gets.chomp
+        if input == '0'
+            display
+        else
+            puts 'Please choose a valid option'
+        end
+    end
 
   def create_book
     print 'Title of the book: '
@@ -106,6 +122,17 @@ class App
     teacher = Teacher.new(specialization, age, name: name)
     @people << teacher
     puts 'Teacher created successfully'
+  end
+  def create_rental
+    puts 'Select a book that you want to rent by name of book'
+    book = gets.chomp
+    puts 'Select a person to rent the book by name of person'
+    person = gets.chomp
+    puts 'Add date of rental'
+    date = gets.chomp
+    rental = Rental.new(date, book, person)
+    @rentals << rental
+    puts 'Rental created successfully'
   end
 end
 
