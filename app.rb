@@ -5,7 +5,8 @@ require_relative './student'
 require_relative './teacher'
 
 class App
-    attr_reader :books, :people, :rentals
+  attr_reader :books, :people, :rentals
+
   def initialize
     @books = []
     @people = []
@@ -29,6 +30,8 @@ class App
     get_list(input)
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+
   def get_list(number)
     case number
     when '1'
@@ -49,6 +52,8 @@ class App
       puts 'Please choose a valid option'
     end
   end
+
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   def list_books
     if @books.empty?
@@ -73,8 +78,6 @@ class App
         puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
     end
-    puts 'For go back to menu press 0'
-    input = gets.chomp
   end
 
   def create_book
@@ -134,43 +137,38 @@ class App
     puts 'Teacher created successfully'
   end
 
-#   def teacher(name, age, specialization)
-#     teacher = Teacher.new(specialization, age, name)
-#     @people << teacher
-#   end
-
   def create_rental
     if @books.length.positive?
-    puts 'Select a book that by there number'
-    @books.each_with_index do |book, index|
-      puts "[#{index}] Title: #{book.title}, Author: #{book.author}"
-    end
-    books = gets.chomp.capitalize
-    puts 'Select a person to rent the book by there number'
-    @people.each_with_index do |person, index|
-      puts "[#{index}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-    persons = gets.chomp.capitalize
-    puts 'Add date of rental [yyyy-mm-dd]]'
-    date = gets.chomp
-    rental = Rental.new(date, @books[books.to_i], @people[persons.to_i])
-    @rentals << rental
-    puts 'Rental created successfully'
-    display
+      puts 'Select a book that by there number'
+      @books.each_with_index do |book, index|
+        puts "[#{index}] Title: #{book.title}, Author: #{book.author}"
+      end
+      books = gets.chomp.capitalize
+      puts 'Select a person to rent the book by there number'
+      @people.each_with_index do |person, index|
+        puts "[#{index}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
+      persons = gets.chomp.capitalize
+      puts 'Add date of rental [yyyy-mm-dd]]'
+      date = gets.chomp
+      rental = Rental.new(date, @books[books.to_i], @people[persons.to_i])
+      @rentals << rental
+      puts 'Rental created successfully'
     else
-        puts 'There are no books'
-        display
+      puts 'There are no books'
     end
+    display
   end
 end
+
 def list_rentals
-    list_people
-    puts 'Select a person to see their rentals by there id'
-    rental_id = gets.chomp.to_i
-    @rentals.each do |rental|
-        if rental.person.id == rental_id
-            puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}, Person: #{rental.person.name}"
-        end
-        display
+  list_people
+  puts 'Select a person to see their rentals by there id'
+  rental_id = gets.chomp.to_i
+  @rentals.each do |rental|
+    if rental.person.id == rental_id
+      puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}, Person: #{rental.person.name}"
     end
+    display
+  end
 end
