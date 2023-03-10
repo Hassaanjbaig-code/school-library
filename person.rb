@@ -39,12 +39,3 @@ class Person < Nameable
     name
   end
 end
-
-# person = Person.new(22, name: 'maximilianus')
-# puts person.correct_name
-
-# capitalizedperson = Capitalize.new(person)
-# puts capitalizedperson.correct_name
-
-# capitalizedtrimmedperson = Trimmer.new(capitalizedperson)
-# puts capitalizedtrimmedperson.correct_name
