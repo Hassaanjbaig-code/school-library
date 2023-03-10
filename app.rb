@@ -1,8 +1,11 @@
 require_relative './book'
 require_relative './person.rb'
 require_relative './rentel.rb'
+require_relative './student.rb'
+require_relative './teacher.rb'
 
 class App
+
     def initialize
         @books = []
         @people = []
@@ -45,17 +48,17 @@ class App
         end
     end
 
-    def list_books
+    def create_book
         print 'Title of the book: '
         title = gets.chomp
         print 'Author of the book: '
         author = gets.chomp
         book = Book.new(title, author)
-        @books.push(book)
+        @books << book
         puts 'Book created successfully'
         display()
     end
-    def list_people
+    def create_person
         print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
         input = gets.chomp
         case input
@@ -68,8 +71,37 @@ class App
         end
         display()
     end
-    def create_person
-        
+    def create_student
+        print 'Add name'
+        name = gets.chomp
+        print 'Add age'
+        age = gets.chomp
+        print 'Add a classroom'
+        classroom = gets.chomp
+        print 'Add parent permission (Yes or No)'
+        parent_permission = gets.chomp
+        permission = case parent_permission
+        when 'Yes'
+            true
+        when 'No' 
+            false
+        else
+            'Please choose a valid option (Yes or No)'
+        end
+        student = Student.new(classroom ,age, name: name, parent_permission: permission)
+        @people << student
+        puts 'Student created successfully'
+    end
+    def create_teacher
+        print 'Add name'
+        name = gets.chomp
+        print 'Add age'
+        age = gets.chomp
+        print 'Add a specialization'
+        specialization = gets.chomp
+        teacher = Teacher.new(specialization, age, name: name)
+        @people << teacher
+        puts 'Teacher created successfully'    
     end
 end
 
