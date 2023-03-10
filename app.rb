@@ -3,6 +3,7 @@ require_relative './person'
 require_relative './rentel'
 require_relative './student'
 require_relative './teacher'
+require 'pry'
 
 class App
     attr_reader :books, :people, :rentals
@@ -117,6 +118,7 @@ class App
                  when 'false'
                    false
                  end
+     binding.pry
     student = Student.new(classroom, age, name, permission)
     @people << student
     puts 'Student created successfully'
@@ -134,10 +136,6 @@ class App
     puts 'Teacher created successfully'
   end
 
-#   def teacher(name, age, specialization)
-#     teacher = Teacher.new(specialization, age, name)
-#     @people << teacher
-#   end
 
   def create_rental
     if @books.length.positive?
