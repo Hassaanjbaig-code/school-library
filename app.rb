@@ -77,7 +77,9 @@ class App
       @people.each do |person|
         puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
+      display
     end
+    display
   end
 
   def create_book
@@ -102,7 +104,6 @@ class App
     else
       puts 'Please choose a valid option'
     end
-    display
   end
 
   def create_student
@@ -123,6 +124,7 @@ class App
     student = Student.new(classroom, age, name, permission)
     @people << student
     puts 'Student created successfully'
+    display
   end
 
   def create_teacher
@@ -135,6 +137,7 @@ class App
     teacher = Teacher.new(specialization, age, name)
     @people << teacher
     puts 'Teacher created successfully'
+    display
   end
 
   def create_rental
@@ -154,15 +157,18 @@ class App
       rental = Rental.new(date, @books[books.to_i], @people[persons.to_i])
       @rentals << rental
       puts 'Rental created successfully'
+      display
     else
+      display
       puts 'There are no books'
     end
-    display
   end
 end
 
 def list_rentals
-  list_people
+    @people.each do |person|
+        puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
   puts 'Select a person to see their rentals by there id'
   rental_id = gets.chomp.to_i
   @rentals.each do |rental|
