@@ -65,6 +65,22 @@ class App
         end
     end
 
+    def list_people
+        if @people.length == 0
+            puts 'There are no people'
+        else
+            @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+        end
+        puts 'For go back to menu press 0'
+        input = gets.chomp
+        if input == '0'
+            display
+        else
+            puts 'Please choose a valid option'
+        end
+    end
+    
+
   def create_book
     print 'Title of the book: '
     title = gets.chomp
