@@ -3,7 +3,7 @@ require_relative './person' # Require the person.rb file
 class Student < Person
   attr_reader :classroom
 
-  def initialize(classroom, name, parent_permission)
+  def initialize(classroom, name, age, parent_permission)
     super(age, name, parent_permission)
     @classroom = classroom
   end

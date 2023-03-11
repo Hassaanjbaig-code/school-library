@@ -57,13 +57,6 @@ class App
     else
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
-    puts 'For go back to menu press 0'
-    input = gets.chomp
-    if input == '0'
-      display
-    else
-      puts 'Please choose a valid option'
-    end
   end
 
   def list_people
