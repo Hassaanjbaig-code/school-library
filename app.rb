@@ -47,6 +47,7 @@ class App
     when '6'
       list_rentals
     when '7'
+        'Thank you for using our app'
       exit
     else
       puts 'Please choose a valid option'
@@ -61,13 +62,7 @@ class App
     else
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
-    puts 'For go back to menu press 0'
-    input = gets.chomp
-    if input == '0'
-      display
-    else
-      puts 'Please choose a valid option'
-    end
+    display
   end
 
   def list_people
@@ -146,22 +141,21 @@ class App
       @books.each_with_index do |book, index|
         puts "[#{index}] Title: #{book.title}, Author: #{book.author}"
       end
-      books = gets.chomp.capitalize
+      books_rental = gets.chomp.capitalize
       puts 'Select a person to rent the book by there number'
       @people.each_with_index do |person, index|
         puts "[#{index}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
-      persons = gets.chomp.capitalize
+       end
+      persons_rental = gets.chomp.capitalize
       puts 'Add date of rental [yyyy-mm-dd]]'
       date = gets.chomp
-      rental = Rental.new(date, @books[books.to_i], @people[persons.to_i])
-      @rentals << rental
+      rental = Rental.new(date, @books[books_rental.to_i], @people[persons_rental.to_i])
+      @rentals.push(rental)
       puts 'Rental created successfully'
-      display
     else
-      display
       puts 'There are no books'
     end
+    display
   end
 end
 
@@ -171,10 +165,14 @@ def list_rentals
   end
   puts 'Select a person to see their rentals by there id'
   rental_id = gets.chomp.to_i
-  @rentals.each do |rental|
-    if rental.person.id == rental_id
-      puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}, Person: #{rental.person.name}"
-    end
-    display
-  end
+  if @rentals.empty?
+    puts 'There are no rentals'
+else
+    @rentals.each { |rental| 
+        if rental.person.id == rental_id
+            puts "Date: #{rental.date} ,Person: #{rental.person.name}  ,Book: #{rental.book.title} by #{rental.book.author}" 
+        end
+    }
+end
+display
 end
