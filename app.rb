@@ -47,7 +47,6 @@ class App
     when '6'
       list_rentals
     when '7'
-        'Thank you for using our app'
       exit
     else
       puts 'Please choose a valid option'
@@ -145,7 +144,7 @@ class App
       puts 'Select a person to rent the book by there number'
       @people.each_with_index do |person, index|
         puts "[#{index}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-       end
+      end
       persons_rental = gets.chomp.capitalize
       puts 'Add date of rental [yyyy-mm-dd]]'
       date = gets.chomp
@@ -167,12 +166,12 @@ def list_rentals
   rental_id = gets.chomp.to_i
   if @rentals.empty?
     puts 'There are no rentals'
-else
-    @rentals.each { |rental| 
-        if rental.person.id == rental_id
-            puts "Date: #{rental.date} ,Person: #{rental.person.name}  ,Book: #{rental.book.title} by #{rental.book.author}" 
-        end
-    }
-end
-display
+  else
+    @rentals.each do |rental|
+      if rental.person.id == rental_id
+        puts "Date: #{rental.date} ,Person: #{rental.person.name}  ,Book: #{rental.book.title} by #{rental.book.author}"
+      end
+    end
+  end
+  display
 end
