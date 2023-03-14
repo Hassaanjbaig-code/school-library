@@ -13,55 +13,12 @@ class App
     @rentals = []
   end
 
-  def display
-    puts 'Welcome to our app'
-    list = Array[
-        '1 - List all books',
-        '2 - List all people',
-        '3 - Create a person',
-        '4 - Create a book',
-        '5 - Create a rental',
-        '6 - List all rentals for a given person id',
-        '7 - Exit'
-    ]
-    list.each { |item| puts item }
-    puts 'Please choose an option by enterin a number:'
-    input = gets.chomp
-    get_list(input)
-  end
-
-  # rubocop:disable Metrics/CyclomaticComplexity
-
-  def get_list(number)
-    case number
-    when '1'
-      list_books
-    when '2'
-      list_people
-    when '3'
-      create_person
-    when '4'
-      create_book
-    when '5'
-      create_rental
-    when '6'
-      list_rentals
-    when '7'
-      exit
-    else
-      puts 'Please choose a valid option'
-    end
-  end
-
-  # rubocop:enable Metrics/CyclomaticComplexity
-
   def list_books
     if @books.empty?
       puts 'There are no books'
     else
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
-    display
   end
 
   def list_people
@@ -71,9 +28,7 @@ class App
       @people.each do |person|
         puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
-      display
     end
-    display
   end
 
   def create_book
@@ -84,7 +39,6 @@ class App
     book = Book.new(title, author)
     @books << book
     puts 'Book created successfully'
-    display
   end
 
   def create_person
@@ -118,7 +72,6 @@ class App
     student = Student.new(classroom, age, name, permission)
     @people << student
     puts 'Student created successfully'
-    display
   end
 
   def create_teacher
@@ -131,7 +84,6 @@ class App
     teacher = Teacher.new(specialization, age, name)
     @people << teacher
     puts 'Teacher created successfully'
-    display
   end
 
   def create_rental
@@ -154,24 +106,23 @@ class App
     else
       puts 'There are no books'
     end
-    display
   end
-end
 
-def list_rentals
-  @people.each do |person|
-    puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-  end
-  puts 'Select a person to see their rentals by there id'
-  rental_id = gets.chomp.to_i
-  if @rentals.empty?
-    puts 'There are no rentals'
-  else
-    @rentals.each do |rental|
-      if rental.person.id == rental_id
-        puts "Date: #{rental.date} ,Person: #{rental.person.name}  ,Book: #{rental.book.title} by #{rental.book.author}"
+  def list_rentals
+    @people.each do |person|
+      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+    puts 'Select a person to see their rentals by there id'
+    rental_id = gets.chomp.to_i
+    if @rentals.empty?
+      puts 'There are no rentals'
+    else
+      @rentals.each do |rental|
+        if rental.person.id == rental_id
+          puts "Date: #{rental.date} ,Person: #{rental.person.name}  ,Book: #{rental.book.title}
+          by #{rental.book.author}"
+        end
       end
     end
   end
-  display
 end
